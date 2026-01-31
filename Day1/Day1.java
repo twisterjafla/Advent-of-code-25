@@ -18,23 +18,40 @@ public class Day1 {
             List<String> lines = Files.readAllLines(filePath);
 
             for (String line:lines){
+                boolean allowScoring = position!=0;
+
                 System.out.print(position + " : ");
                 int isPos = line.charAt(0)=='L'? -1 : 1; 
                 int addVal = Integer.valueOf(line.substring(1));
                 position+=isPos*addVal;
                 //System.out.print(position + " : ");
-                while (position>99){
-                    position-=100;
-                }
-                while (position<0){
-                    position+=100;
-                }
 
-                System.out.println(line + " : " + position);
+                if (position>99||position<0)
+                    while(position>99||position<0){
+                        if (position>0) position-=100;
+                        else{
+                            position+=100;
+                            if (position==0) ZeroCount++;
+                        }
+                        
+                        // if (position==0){
+                        //     ZeroCount++;
+                        //     allowScoring=false;
+                        // }
+                        if (allowScoring){ 
+                            ZeroCount++;
+                            allowScoring=true;
+                        }
+                        
+                    }
 
-                if (position==0){
+                else if (position==0){
                     ZeroCount++;
                 }
+
+                System.out.println(line + " : " + position + " : " + ZeroCount);
+
+
 
             }
 
