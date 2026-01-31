@@ -24,10 +24,10 @@ public class Day1 {
                 position+=isPos*addVal;
                 //System.out.print(position + " : ");
                 while (position>99){
-                    position-=99;
+                    position-=100;
                 }
                 while (position<0){
-                    position+=99;
+                    position+=100;
                 }
 
                 System.out.println(line + " : " + position);
