@@ -24,16 +24,20 @@ public class Day2 {
 
                 for (long i=range[0]; i<=range[1]; i++){
                     String iStr = Long.toString(i);
-                    String firstHalf, secondHalf;
-                    if (iStr.length()%2==0){
-                        firstHalf = iStr.substring(0, iStr.length()/2);
-                        secondHalf = iStr.substring(iStr.length()/2);
-                        if (firstHalf.equals(secondHalf)){
+                    for (int div = 1; div<=iStr.length()/2.0; div++){
+                        if (iStr.length()%div==0){
+   
+                            if (checkDiv(iStr, div)){
+                                System.out.println(i + " Identified as a number. Incrementing count from " + count + " to " + (count+i));
+                                count+=i;
+                                div=999999999;
+                            }
+                            
+                        }
+                    }
+                    
 
-                        System.out.println(i + " Identified as a number. Incrementing count from " + count + " to " + (count+i));
-                        count+=i;
-                    }
-                    }
+   
                     // else{
                     //     firstHalf = iStr.substring(0, (iStr.length()-1)/2);
                     //     secondHalf = iStr.substring((iStr.length()+1)/2);
@@ -49,4 +53,21 @@ public class Day2 {
 
         System.out.println("Final Awnser: " + count);
     }
+
+    public static boolean checkDiv(String checkString, int div){
+        String checkStr = checkString.substring(0, div);
+        //System.out.println(checkStr.length() +" : " + div + " : " + checkString);
+        for (int subStrID = 1; subStrID<checkString.length()/div; subStrID++){
+            // System.out.println(subStrID);
+
+            if (!checkStr.equals(checkString.substring(subStrID*div, (subStrID+1)*div))){
+                return false;
+            }
+        }
+        return true;
+    }
 }
+// 4174379265
+// 4174379265
+
+//
